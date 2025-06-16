@@ -1,10 +1,11 @@
 import React from 'react';
 import { View, Text, StyleSheet, Dimensions } from 'react-native';
 
+// Pobranie wymiarów ekranu do stylów
 const { width, height } = Dimensions.get('window');
 
 const MedicationDetailScreen = ({ route }) => {
-  const { medication } = route.params;
+  const { medication } = route.params; // Odbierz dane leku przekazane z poprzedniego ekranu
 
   return (
     <View style={styles.container}>

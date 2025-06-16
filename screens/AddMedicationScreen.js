@@ -1,30 +1,25 @@
 import React, { useState, useEffect } from 'react';
 import * as Notifications from 'expo-notifications';
-import {
-  View,
-  TextInput,
-  StyleSheet,
-  Platform,
-  KeyboardAvoidingView,
-  ScrollView,
-  Alert,
-  Dimensions,
-} from 'react-native';
+import { View,TextInput,StyleSheet,Platform,KeyboardAvoidingView,ScrollView,Alert,Dimensions } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import uuid from 'react-native-uuid';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import CustomButton from '../components/CustomButton';
 
+// Pobranie rozmiarów ekranu
 const { width, height } = Dimensions.get('window');
 
 export default function AddMedicationScreen({ navigation, route }) {
-  const editItem = route.params?.item;
+  const editItem = route.params?.item; // Pobranie leku do edycji (jeśli istnieje)
+
+  // Stany formularza
   const [name, setName] = useState('');
   const [dose, setDose] = useState('');
   const [time, setTime] = useState(new Date());
-  const [showPicker, setShowPicker] = useState(false);
+  const [showPicker, setShowPicker] = useState(false); // Czy wyświetlić picker czasu
 
+  // Jeśli edytujemy lek, wczytaj jego dane do formularza
   useEffect(() => {
     if (editItem) {
       setName(editItem.name);
@@ -33,6 +28,7 @@ export default function AddMedicationScreen({ navigation, route }) {
     }
   }, [editItem]);
 
+  // Funkcja planująca powiadomienie
   const scheduleNotification = async (medication) => {
     const now = new Date();
     const triggerTime = new Date(now);
@@ -41,6 +37,7 @@ export default function AddMedicationScreen({ navigation, route }) {
     triggerTime.setMinutes(time.getMinutes());
     triggerTime.setSeconds(0);
 
+    // Jeśli czas już minął, ustaw na następny dzień
     if (triggerTime <= now) {
       triggerTime.setDate(triggerTime.getDate() + 1); // jutro
     }
@@ -56,6 +53,7 @@ export default function AddMedicationScreen({ navigation, route }) {
     });
   };
 
+  // Obsługa zapisu leku (nowy lub edytowany)
   const handleSave = async () => {
     if (!name || !dose) {
       Alert.alert('Błąd', 'Uzupełnij nazwę i dawkę leku.');
@@ -67,19 +65,23 @@ export default function AddMedicationScreen({ navigation, route }) {
 
     let updated;
     if (editItem) {
+      // Edytuj istniejący lek
       updated = meds.map(m =>
         m.id === editItem.id ? { ...m, name, dose, time } : m
       );
     } else {
+      // Dodaj nowy lek
       const newMed = { id: uuid.v4(), name, dose, time };
       updated = [...meds, newMed];
       await scheduleNotification(newMed);
     }
 
+    // Zapisz listę leków do pamięci
     await AsyncStorage.setItem('medications', JSON.stringify(updated));
-    navigation.goBack();
+    navigation.goBack(); // Wróć do poprzedniego ekranu
   };
 
+  // Zmiana czasu z pickera
   const onChangeTime = (event, selectedDate) => {
     const currentDate = selectedDate || time;
     setShowPicker(false);

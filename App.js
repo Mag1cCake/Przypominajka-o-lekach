@@ -3,11 +3,13 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import * as Notifications from 'expo-notifications';
 
+// Importy ekranów aplikacji
 import LoginScreen from './screens/LoginScreen';
 import HomeScreen from './screens/HomeScreen';
 import AddMedicationScreen from './screens/AddMedicationScreen';
-import MedicationDetailScreen from './screens/MedicationDetailScreen'; // NOWOŚĆ
+import MedicationDetailScreen from './screens/MedicationDetailScreen';
 
+// Ustawienie obsługi powiadomień
 Notifications.setNotificationHandler({
   handleNotification: async () => ({
     shouldShowAlert: true,
@@ -19,13 +21,15 @@ Notifications.setNotificationHandler({
 const Stack = createNativeStackNavigator();
 
 export default function App() {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(false); // Stan logowania użytkownika
 
   useEffect(() => {
+    // Listener do odbierania powiadomień
     const subscription = Notifications.addNotificationReceivedListener(notification => {
       console.log('Otrzymano powiadomienie:', notification);
     });
 
+    // Czyszczenie listenera przy odmontowaniu komponentu
     return () => subscription.remove();
   }, []);
 

@@ -26,10 +26,39 @@ Aplikacja mobilna „Przypominajka o lekach” jest przeznaczona dla użytkownik
 
 ## Funkcjonalności
 
-- **Dodawanie leków**
-- **Lista przypomnień**
-- **Powiadomienia push**
-- **Edycja i usuwanie wpisów**
-- **Widok szczegółów leku**
-- **Ekran logowania** 
-- **Zarządzanie sesją użytkownika**
+- **Ekran logowania (proste logowanie z weryfikacją danych)**
+- **Lista zapisanych leków**
+- **Dodawanie, edytowanie i usuwanie leków**
+- **Zaplanowane powiadomienia o przyjęciu leku**
+- **Szczegóły leku po kliknięciu**
+- **Przechowywanie danych w pamięci lokalnej (AsyncStorage)** 
+- **Podstawowe testy jednostkowe komponentów**
+
+---
+
+## Instrukcja uruchomienia projektu
+
+- **Klonuj repozytorium:**
+    git clone https://github.com/twoj-uzytkownik/nazwa-projektu.git
+    cd nazwa-projektu
+
+- **Zainstaluj zależności:**
+    - npm install
+    - npm install @react-navigation/native @react-navigation/native-stack
+    - npm install @react-native-async-storage/async-storage
+    - npm install expo-notifications
+    - npm install react-native-uuid
+    - npm install @react-native-community/datetimepicker
+    - npm install react-native-safe-area-context
+    - npx expo install react-native-screens react-native-safe-area-context react-native-gesture-handler react-native-reanimated react-native-svg
+
+- **Uruchomienie projektu**
+    npx expo start
+
+*Aby pomyślnie się zalogować, należy wpisać login użytkownika i hasło 1234*
+
+- **Zależności do testowania komponentów**
+
+npx expo install react-native-screens react-native-safe-area-context react-native-gesture-handler react-native-reanimated react-native-svg
+
+npx jest
