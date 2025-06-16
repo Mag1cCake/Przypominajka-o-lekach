@@ -20,7 +20,6 @@ Aplikacja mobilna „Przypominajka o lekach” jest przeznaczona dla użytkownik
 - **expo-notifications** – obsługa powiadomień lokalnych
 - **UUID** – generowanie unikalnych identyfikatorów leków
 - **DateTimePicker** – wybór godziny przyjmowania leków
-- **Jest** + **React Native Testing Library** – testy jednostkowe
 
 ---
 
@@ -32,7 +31,6 @@ Aplikacja mobilna „Przypominajka o lekach” jest przeznaczona dla użytkownik
 - **Zaplanowane powiadomienia o przyjęciu leku**
 - **Szczegóły leku po kliknięciu**
 - **Przechowywanie danych w pamięci lokalnej (AsyncStorage)** 
-- **Podstawowe testy jednostkowe komponentów**
 
 ---
 
