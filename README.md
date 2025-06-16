@@ -55,10 +55,4 @@ Aplikacja mobilna „Przypominajka o lekach” jest przeznaczona dla użytkownik
 - **Uruchomienie projektu**
     npx expo start
 
-*Aby pomyślnie się zalogować, należy wpisać login użytkownika i hasło 1234*
-
-- **Zależności do testowania komponentów**
-
-npx expo install react-native-screens react-native-safe-area-context react-native-gesture-handler react-native-reanimated react-native-svg
-
-npx jest
+*Aby pomyślnie się zalogować, należy wpisać login user i hasło 1234*
